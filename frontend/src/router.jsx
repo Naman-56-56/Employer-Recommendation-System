@@ -9,6 +9,7 @@ import AdminLayout from './layouts/AdminLayout.jsx';
 import ManagerLayout from './layouts/ManagerLayout.jsx';
 
 // Pages
+import Homepage from './pages/Homepage.jsx';
 import StudentDashboard from './pages/student/Dashboard.jsx';
 import EmployerDashboard from './pages/employer/Dashboard.jsx';
 import AdminDashboard from './pages/admin/Dashboard.jsx';
@@ -39,14 +40,28 @@ import ManagerCompanies from './pages/manager/Companies.jsx';
 import ManagerAddCompany from './pages/manager/AddCompany.jsx';
 import ManagerCompanyDetail from './pages/manager/CompanyDetail.jsx';
 
+import Layout from './pages/Layout.jsx';
+import { loader as homepageLoader } from './pages/Homepage.jsx';
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CompanyRegistration />, // Default entry
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Homepage />,
+        loader: homepageLoader
+      }
+    ]
   },
   {
     path: '/login',
-    element: <Login />, // Default entry
+    element: <Login />,
+  },
+  {
+    path: '/company-registration',
+    element: <CompanyRegistration />,
   },
   {
     path: '/register',
@@ -121,4 +136,4 @@ const router = createBrowserRouter([
   }
 ]);
 
-export default router;
+export { router };
